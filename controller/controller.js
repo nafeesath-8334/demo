@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken'); // CommonJS syntax
 const user = require("../schema/regUserSchema");
-const adModel = require("../schema/adItemSchema");
+const adModels = require("../schema/addSchemas");
 require('dotenv').config()
 
 
@@ -117,7 +117,7 @@ exports.editUser = async (req, res) => {
         const userId = Number(req.params.userId);
         console.log("Updating user with ID:", userId, "Request Body:", req.body);
 
-        const imageUrl = `/upload/${req.file.filename}`;
+        const imageUrl = `/profileImages/${req.file.filename}`;
         const existingUser = await user.findOne({ userId });
 
         if (!existingUser) {
@@ -157,10 +157,11 @@ exports.editUser = async (req, res) => {
 
 exports.addAds = async (req, res) => {
     try {
-        const userId = Number(req.params.UserId);
-    console.log("one",req)
+        // const userId = Number(req.params.UserId);
+    // console.log("one",req)
+    console.log("files",req.files)
     console.log("ads",req.body)
-    console.log("userid",UserId)
+    // console.log("userid",UserId)
         const {
             brand,
             year,
@@ -173,22 +174,14 @@ exports.addAds = async (req, res) => {
             price,
             category,
             subcategory,
-            UserId,
+            userId,
         } = req.body;
-        console.log( brand,
-            year,
-            fuel,
-            transmission,
-            kmDriven,
-            owners,
-            title,
-            description,
-            price)
-
-            const imageUrls = req.files?.map(file => `/upload/${file.filename}`) || [];
         
-        const newAd = new adModel({
-            UserId,
+
+            const imageUrls = req.files?.map(file => `/profileImages/${file.filename}`) || [];
+        console.log("imageurl",imageUrls)
+        const newAd = new adModels({
+            userId,
             category,
             subcategory,
             brand,
@@ -211,9 +204,18 @@ exports.addAds = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
+}
+
+exports.getAllAds = async (req, res) => {
+    console.log("inside get all ads" )
+    try {
+        const adds = await adModels.find();
+        
+        res.status(200).json(adds);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 };
-
-
 
 
 

@@ -13,9 +13,6 @@ const storage=multer.diskStorage({
       cb(new Error("Only image files are allowed!"), false);
     }
   };
-  const upload=multer({storage,fileFilter})
-  module.exports=upload
-
-
-
- 
+  const uploadAds=multer({storage,fileFilter})
+  module.exports=uploadAds
+  
