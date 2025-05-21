@@ -46,7 +46,14 @@ const regUserSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+resetPasswordToken:String,
+resetPasswordExpires:Date,
+ favorites: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'adModels'
+  }],
 
+    
 });
 
 const user = mongoose.model("userModel", regUserSchema)
