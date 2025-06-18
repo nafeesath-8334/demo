@@ -48,10 +48,10 @@ const regUserSchema = new mongoose.Schema({
   },
 resetPasswordToken:String,
 resetPasswordExpires:Date,
- favorites: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'adModels'
-  }],
+ favorites: {
+    type:[Number],
+  
+  },
 
     
 });

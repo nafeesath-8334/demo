@@ -23,6 +23,6 @@ router.post('/forgotPassword',forgotPswd)
 router.post("/resetPassword/:token", resetPassword)
 
 router.get('/getUserFavorites/:userId',getUserFavorites)
- router.post('/addToFavorites/:userId/:adId', addToFavorites);
- router.delete('/removeFromFavorites/:userId/:adId', removeFromFavorites);
+ router.post('/addToFavorites', addToFavorites);
+ router.delete('/removeFromFavorites', removeFromFavorites);
 module.exports=router;

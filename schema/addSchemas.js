@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 
 const addSchema = new mongoose.Schema({
   adId: {
-    type: String,
+    type: Number,
   },
 
   userId: {
-    type: String,
+    type: Number,
   },
 
   category: {
