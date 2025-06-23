@@ -3,19 +3,20 @@ const jwt = require('jsonwebtoken');
 const jwtMiddleware = (req, res, next) => {
 
     console.log("inside jwtMiddleware");
-console.log(req);
+    console.log(req);
 
     // Extracting the JWT from the Authorization header
 
-const token = req.headers['authorization'] && req.headers['authorization'].split(" ")[1].replace(/^"|"$/g, '');
+    const token = req.headers['authorization'] && req.headers['authorization'].split(" ")[1].replace(/^"|"$/g, '');
     console.log("Received token:", token);
 
     try {
         // Verifying the JWT using the secret key
         const secretKey = process.env.JWT_SECRET;
         const jwtResponse = jwt.verify(token, secretKey);
+console.log("jwtResponse:",jwtResponse);
 
-        
+
         next();
     } catch (error) {
         console.log(error);
